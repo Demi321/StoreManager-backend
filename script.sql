@@ -155,10 +155,8 @@ CREATE TABLE app_user (
 
     CONSTRAINT fk_app_user_role
         FOREIGN KEY (role_id) REFERENCES app_role (id)
-        ON DELETE RESTRICT,
-
-    CONSTRAINT chk_app_user_bcrypt_format
-        CHECK (password_hash ~ '^\$2[aby]\$.{56}$')
+        ON DELETE RESTRICT
+ 
 );
 
 -- Un username debe ser único por entidad, case-insensitive
