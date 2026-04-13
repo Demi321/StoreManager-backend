@@ -1,7 +1,7 @@
 package com.sm.storagemanager.sale.service.impl;
 
 import com.sm.storagemanager.appuser.entity.AppUser;
-import com.sm.storagemanager.businessentity.entity.BusinessEntity;
+import com.sm.storagemanager.branch.entity.Branch;
 import com.sm.storagemanager.customer.entity.Customer;
 import com.sm.storagemanager.sale.dto.SaleDto;
 import com.sm.storagemanager.sale.entity.Sale;
@@ -23,7 +23,7 @@ public class SaleServiceImpl extends AbstractCrudService<Sale, SaleDto, Long> im
     protected SaleDto toDto(Sale entity) {
         return new SaleDto(
                 entity.getId(),
-                entity.getEntity().getId(),
+                entity.getBranch().getId(),
                 entity.getWarehouse().getId(),
                 entity.getUser().getId(),
                 entity.getCustomer() != null ? entity.getCustomer().getId() : null,
@@ -50,20 +50,21 @@ public class SaleServiceImpl extends AbstractCrudService<Sale, SaleDto, Long> im
 
     @Override
     protected void updateEntity(Sale entity, SaleDto dto) {
-        entity.setEntity(getReference(BusinessEntity.class, dto.entityId()));
-        entity.setWarehouse(getReference(Warehouse.class, dto.warehouseId()));
-        entity.setUser(getReference(AppUser.class, dto.userId()));
-        entity.setCustomer(getReference(Customer.class, dto.customerId()));
-        entity.setSaleFolio(dto.saleFolio());
-        entity.setSaleDate(dto.saleDate());
-        entity.setSubtotal(dto.subtotal());
-        entity.setDiscountTotal(dto.discountTotal());
-        entity.setTaxTotal(dto.taxTotal());
-        entity.setTotal(dto.total());
-        entity.setStatus(dto.status());
-        entity.setSaleType(dto.saleType());
-        entity.setNotes(dto.notes());
-        entity.setCreatedAt(dto.createdAt());
-        entity.setUpdatedAt(dto.updatedAt());
+        entity.setBranch(getReference(Branch.class, dto.getBranchId()));
+        entity.setWarehouse(getReference(Warehouse.class, dto.getWarehouseId()));
+        entity.setUser(getReference(AppUser.class, dto.getUserId()));
+        entity.setCustomer(getReference(Customer.class, dto.getCustomerId()));
+        entity.setSaleFolio(dto.getSaleFolio());
+        entity.setSaleDate(dto.getSaleDate());
+        entity.setSubtotal(dto.getSubtotal());
+        entity.setDiscountTotal(dto.getDiscountTotal());
+        entity.setTaxTotal(dto.getTaxTotal());
+        entity.setTotal(dto.getTotal());
+        entity.setStatus(dto.getStatus());
+        entity.setSaleType(dto.getSaleType());
+        entity.setNotes(dto.getNotes());
+        entity.setCreatedAt(dto.getCreatedAt());
+        entity.setUpdatedAt(dto.getUpdatedAt());
     }
 }
+

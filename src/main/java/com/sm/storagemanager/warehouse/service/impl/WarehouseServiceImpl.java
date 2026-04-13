@@ -1,6 +1,6 @@
 package com.sm.storagemanager.warehouse.service.impl;
 
-import com.sm.storagemanager.businessentity.entity.BusinessEntity;
+import com.sm.storagemanager.branch.entity.Branch;
 import com.sm.storagemanager.shared.crud.service.impl.AbstractCrudService;
 import com.sm.storagemanager.warehouse.dto.WarehouseDto;
 import com.sm.storagemanager.warehouse.entity.Warehouse;
@@ -21,16 +21,10 @@ public class WarehouseServiceImpl extends AbstractCrudService<Warehouse, Warehou
     protected WarehouseDto toDto(Warehouse entity) {
         return new WarehouseDto(
                 entity.getId(),
-                entity.getEntity().getId(),
+                entity.getBranch().getId(),
                 entity.getName(),
                 entity.getType(),
                 entity.getPhone(),
-                entity.getAddressLine1(),
-                entity.getAddressLine2(),
-                entity.getCity(),
-                entity.getState(),
-                entity.getCountry(),
-                entity.getPostalCode(),
                 entity.isActive(),
                 entity.getCreatedAt(),
                 entity.getUpdatedAt()
@@ -46,18 +40,13 @@ public class WarehouseServiceImpl extends AbstractCrudService<Warehouse, Warehou
 
     @Override
     protected void updateEntity(Warehouse entity, WarehouseDto dto) {
-        entity.setEntity(getReference(BusinessEntity.class, dto.entityId()));
-        entity.setName(dto.name());
-        entity.setType(dto.type());
-        entity.setPhone(dto.phone());
-        entity.setAddressLine1(dto.addressLine1());
-        entity.setAddressLine2(dto.addressLine2());
-        entity.setCity(dto.city());
-        entity.setState(dto.state());
-        entity.setCountry(dto.country());
-        entity.setPostalCode(dto.postalCode());
-        entity.setActive(dto.active());
-        entity.setCreatedAt(dto.createdAt());
-        entity.setUpdatedAt(dto.updatedAt());
+        entity.setBranch(getReference(Branch.class, dto.getBranchId()));
+        entity.setName(dto.getName());
+        entity.setType(dto.getType());
+        entity.setPhone(dto.getPhone());
+        entity.setActive(dto.isActive());
+        entity.setCreatedAt(dto.getCreatedAt());
+        entity.setUpdatedAt(dto.getUpdatedAt());
     }
 }
+

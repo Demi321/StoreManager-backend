@@ -1,16 +1,26 @@
 package com.sm.storagemanager.saleitem.dto;
 
 import java.math.BigDecimal;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-public record SaleItemDto(
-        Long id,
-        Long saleId,
-        Long productId,
-        BigDecimal quantity,
-        BigDecimal unitPrice,
-        BigDecimal unitDiscount,
-        BigDecimal unitTax,
-        BigDecimal lineSubtotal,
-        BigDecimal lineTotal
-) {
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class SaleItemDto {
+
+    private Long id;
+    private Long saleId;
+    private Long productId;
+    private BigDecimal quantity;
+    private BigDecimal unitPrice;
+    private BigDecimal unitDiscount;
+    private BigDecimal unitTax;
+    private BigDecimal lineSubtotal;
+    private BigDecimal lineTotal;
 }

@@ -59,6 +59,7 @@ public class RolePermissionController {
     }
 
     private RolePermissionDto withIds(Long roleId, Long permissionId, RolePermissionDto dto) {
-        return new RolePermissionDto(roleId, permissionId, dto.createdAt());
+        return new RolePermissionDto(roleId, permissionId, dto.getCreatedAt());
     }
 }
+

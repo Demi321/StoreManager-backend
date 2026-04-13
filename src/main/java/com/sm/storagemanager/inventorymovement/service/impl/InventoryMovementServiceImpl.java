@@ -1,7 +1,7 @@
 package com.sm.storagemanager.inventorymovement.service.impl;
 
 import com.sm.storagemanager.appuser.entity.AppUser;
-import com.sm.storagemanager.businessentity.entity.BusinessEntity;
+import com.sm.storagemanager.branch.entity.Branch;
 import com.sm.storagemanager.inventorymovement.dto.InventoryMovementDto;
 import com.sm.storagemanager.inventorymovement.entity.InventoryMovement;
 import com.sm.storagemanager.inventorymovement.repository.InventoryMovementRepository;
@@ -25,7 +25,7 @@ public class InventoryMovementServiceImpl
     protected InventoryMovementDto toDto(InventoryMovement entity) {
         return new InventoryMovementDto(
                 entity.getId(),
-                entity.getEntity().getId(),
+                entity.getBranch().getId(),
                 entity.getWarehouse().getId(),
                 entity.getProduct().getId(),
                 entity.getUser().getId(),
@@ -50,18 +50,19 @@ public class InventoryMovementServiceImpl
 
     @Override
     protected void updateEntity(InventoryMovement entity, InventoryMovementDto dto) {
-        entity.setEntity(getReference(BusinessEntity.class, dto.entityId()));
-        entity.setWarehouse(getReference(Warehouse.class, dto.warehouseId()));
-        entity.setProduct(getReference(Product.class, dto.productId()));
-        entity.setUser(getReference(AppUser.class, dto.userId()));
-        entity.setMovementType(dto.movementType());
-        entity.setQuantity(dto.quantity());
-        entity.setStockBefore(dto.stockBefore());
-        entity.setStockAfter(dto.stockAfter());
-        entity.setUnitCost(dto.unitCost());
-        entity.setReferenceType(dto.referenceType());
-        entity.setReferenceId(dto.referenceId());
-        entity.setNotes(dto.notes());
-        entity.setCreatedAt(dto.createdAt());
+        entity.setBranch(getReference(Branch.class, dto.getBranchId()));
+        entity.setWarehouse(getReference(Warehouse.class, dto.getWarehouseId()));
+        entity.setProduct(getReference(Product.class, dto.getProductId()));
+        entity.setUser(getReference(AppUser.class, dto.getUserId()));
+        entity.setMovementType(dto.getMovementType());
+        entity.setQuantity(dto.getQuantity());
+        entity.setStockBefore(dto.getStockBefore());
+        entity.setStockAfter(dto.getStockAfter());
+        entity.setUnitCost(dto.getUnitCost());
+        entity.setReferenceType(dto.getReferenceType());
+        entity.setReferenceId(dto.getReferenceId());
+        entity.setNotes(dto.getNotes());
+        entity.setCreatedAt(dto.getCreatedAt());
     }
 }
+

@@ -41,13 +41,14 @@ public class SaleItemServiceImpl extends AbstractCrudService<SaleItem, SaleItemD
 
     @Override
     protected void updateEntity(SaleItem entity, SaleItemDto dto) {
-        entity.setSale(getReference(Sale.class, dto.saleId()));
-        entity.setProduct(getReference(Product.class, dto.productId()));
-        entity.setQuantity(dto.quantity());
-        entity.setUnitPrice(dto.unitPrice());
-        entity.setUnitDiscount(dto.unitDiscount());
-        entity.setUnitTax(dto.unitTax());
-        entity.setLineSubtotal(dto.lineSubtotal());
-        entity.setLineTotal(dto.lineTotal());
+        entity.setSale(getReference(Sale.class, dto.getSaleId()));
+        entity.setProduct(getReference(Product.class, dto.getProductId()));
+        entity.setQuantity(dto.getQuantity());
+        entity.setUnitPrice(dto.getUnitPrice());
+        entity.setUnitDiscount(dto.getUnitDiscount());
+        entity.setUnitTax(dto.getUnitTax());
+        entity.setLineSubtotal(dto.getLineSubtotal());
+        entity.setLineTotal(dto.getLineTotal());
     }
 }
+

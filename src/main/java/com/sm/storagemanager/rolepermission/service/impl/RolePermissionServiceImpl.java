@@ -32,16 +32,17 @@ public class RolePermissionServiceImpl
     @Override
     protected RolePermission toNewEntity(RolePermissionDto dto) {
         RolePermission entity = new RolePermission();
-        entity.setId(new RolePermissionId(dto.roleId(), dto.permissionId()));
+        entity.setId(new RolePermissionId(dto.getRoleId(), dto.getPermissionId()));
         updateEntity(entity, dto);
         return entity;
     }
 
     @Override
     protected void updateEntity(RolePermission entity, RolePermissionDto dto) {
-        entity.setId(new RolePermissionId(dto.roleId(), dto.permissionId()));
-        entity.setRole(getReference(AppRole.class, dto.roleId()));
-        entity.setPermission(getReference(Permission.class, dto.permissionId()));
-        entity.setCreatedAt(dto.createdAt());
+        entity.setId(new RolePermissionId(dto.getRoleId(), dto.getPermissionId()));
+        entity.setRole(getReference(AppRole.class, dto.getRoleId()));
+        entity.setPermission(getReference(Permission.class, dto.getPermissionId()));
+        entity.setCreatedAt(dto.getCreatedAt());
     }
 }
+

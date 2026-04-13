@@ -1,6 +1,6 @@
 package com.sm.storagemanager.product.entity;
 
-import com.sm.storagemanager.businessentity.entity.BusinessEntity;
+import com.sm.storagemanager.branch.entity.Branch;
 import com.sm.storagemanager.productcategory.entity.ProductCategory;
 import com.sm.storagemanager.shared.enums.ProductStatus;
 import jakarta.persistence.Column;
@@ -38,8 +38,8 @@ public class Product {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "entity_id", nullable = false)
-    private BusinessEntity entity;
+    @JoinColumn(name = "branch_id", nullable = false)
+    private Branch branch;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")

@@ -1,7 +1,7 @@
 package com.sm.storagemanager.purchase.service.impl;
 
 import com.sm.storagemanager.appuser.entity.AppUser;
-import com.sm.storagemanager.businessentity.entity.BusinessEntity;
+import com.sm.storagemanager.branch.entity.Branch;
 import com.sm.storagemanager.purchase.dto.PurchaseDto;
 import com.sm.storagemanager.purchase.entity.Purchase;
 import com.sm.storagemanager.purchase.repository.PurchaseRepository;
@@ -24,7 +24,7 @@ public class PurchaseServiceImpl extends AbstractCrudService<Purchase, PurchaseD
     protected PurchaseDto toDto(Purchase entity) {
         return new PurchaseDto(
                 entity.getId(),
-                entity.getEntity().getId(),
+                entity.getBranch().getId(),
                 entity.getSupplier().getId(),
                 entity.getWarehouse().getId(),
                 entity.getUser().getId(),
@@ -49,18 +49,19 @@ public class PurchaseServiceImpl extends AbstractCrudService<Purchase, PurchaseD
 
     @Override
     protected void updateEntity(Purchase entity, PurchaseDto dto) {
-        entity.setEntity(getReference(BusinessEntity.class, dto.entityId()));
-        entity.setSupplier(getReference(Supplier.class, dto.supplierId()));
-        entity.setWarehouse(getReference(Warehouse.class, dto.warehouseId()));
-        entity.setUser(getReference(AppUser.class, dto.userId()));
-        entity.setPurchaseFolio(dto.purchaseFolio());
-        entity.setPurchaseDate(dto.purchaseDate());
-        entity.setSubtotal(dto.subtotal());
-        entity.setTaxTotal(dto.taxTotal());
-        entity.setTotal(dto.total());
-        entity.setStatus(dto.status());
-        entity.setNotes(dto.notes());
-        entity.setCreatedAt(dto.createdAt());
-        entity.setUpdatedAt(dto.updatedAt());
+        entity.setBranch(getReference(Branch.class, dto.getBranchId()));
+        entity.setSupplier(getReference(Supplier.class, dto.getSupplierId()));
+        entity.setWarehouse(getReference(Warehouse.class, dto.getWarehouseId()));
+        entity.setUser(getReference(AppUser.class, dto.getUserId()));
+        entity.setPurchaseFolio(dto.getPurchaseFolio());
+        entity.setPurchaseDate(dto.getPurchaseDate());
+        entity.setSubtotal(dto.getSubtotal());
+        entity.setTaxTotal(dto.getTaxTotal());
+        entity.setTotal(dto.getTotal());
+        entity.setStatus(dto.getStatus());
+        entity.setNotes(dto.getNotes());
+        entity.setCreatedAt(dto.getCreatedAt());
+        entity.setUpdatedAt(dto.getUpdatedAt());
     }
 }
+

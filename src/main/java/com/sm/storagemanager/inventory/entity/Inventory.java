@@ -1,6 +1,6 @@
 package com.sm.storagemanager.inventory.entity;
 
-import com.sm.storagemanager.businessentity.entity.BusinessEntity;
+import com.sm.storagemanager.branch.entity.Branch;
 import com.sm.storagemanager.product.entity.Product;
 import com.sm.storagemanager.warehouse.entity.Warehouse;
 import jakarta.persistence.Column;
@@ -34,8 +34,8 @@ public class Inventory {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "entity_id", nullable = false)
-    private BusinessEntity entity;
+    @JoinColumn(name = "branch_id", nullable = false)
+    private Branch branch;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "warehouse_id", nullable = false)

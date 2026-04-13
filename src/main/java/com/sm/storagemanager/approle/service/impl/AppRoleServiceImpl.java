@@ -4,7 +4,7 @@ import com.sm.storagemanager.approle.dto.AppRoleDto;
 import com.sm.storagemanager.approle.entity.AppRole;
 import com.sm.storagemanager.approle.repository.AppRoleRepository;
 import com.sm.storagemanager.approle.service.AppRoleService;
-import com.sm.storagemanager.businessentity.entity.BusinessEntity;
+import com.sm.storagemanager.branch.entity.Branch;
 import com.sm.storagemanager.shared.crud.service.impl.AbstractCrudService;
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ public class AppRoleServiceImpl extends AbstractCrudService<AppRole, AppRoleDto,
     protected AppRoleDto toDto(AppRole entity) {
         return new AppRoleDto(
                 entity.getId(),
-                entity.getEntity().getId(),
+                entity.getBranch().getId(),
                 entity.getName(),
                 entity.getDescription(),
                 entity.getStatus(),
@@ -38,11 +38,12 @@ public class AppRoleServiceImpl extends AbstractCrudService<AppRole, AppRoleDto,
 
     @Override
     protected void updateEntity(AppRole entity, AppRoleDto dto) {
-        entity.setEntity(getReference(BusinessEntity.class, dto.entityId()));
-        entity.setName(dto.name());
-        entity.setDescription(dto.description());
-        entity.setStatus(dto.status());
-        entity.setCreatedAt(dto.createdAt());
-        entity.setUpdatedAt(dto.updatedAt());
+        entity.setBranch(getReference(Branch.class, dto.getBranchId()));
+        entity.setName(dto.getName());
+        entity.setDescription(dto.getDescription());
+        entity.setStatus(dto.getStatus());
+        entity.setCreatedAt(dto.getCreatedAt());
+        entity.setUpdatedAt(dto.getUpdatedAt());
     }
 }
+

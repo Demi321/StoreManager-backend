@@ -5,5 +5,6 @@ import com.sm.storagemanager.shared.crud.service.CrudService;
 
 public interface BusinessEntityService extends CrudService<BusinessEntityDto, Long> {
 
-  
+    boolean existsByName(String name);
+    boolean existsByEmail(String email);
 }

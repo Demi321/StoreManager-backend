@@ -40,10 +40,11 @@ public class SalePaymentServiceImpl
 
     @Override
     protected void updateEntity(SalePayment entity, SalePaymentDto dto) {
-        entity.setSale(getReference(Sale.class, dto.saleId()));
-        entity.setPaymentMethod(getReference(PaymentMethod.class, dto.paymentMethodId()));
-        entity.setAmount(dto.amount());
-        entity.setPaymentReference(dto.paymentReference());
-        entity.setPaidAt(dto.paidAt());
+        entity.setSale(getReference(Sale.class, dto.getSaleId()));
+        entity.setPaymentMethod(getReference(PaymentMethod.class, dto.getPaymentMethodId()));
+        entity.setAmount(dto.getAmount());
+        entity.setPaymentReference(dto.getPaymentReference());
+        entity.setPaidAt(dto.getPaidAt());
     }
 }
+

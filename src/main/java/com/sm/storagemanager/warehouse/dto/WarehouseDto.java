@@ -2,21 +2,25 @@ package com.sm.storagemanager.warehouse.dto;
 
 import com.sm.storagemanager.shared.enums.WarehouseType;
 import java.time.OffsetDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-public record WarehouseDto(
-        Long id,
-        Long entityId,
-        String name,
-        WarehouseType type,
-        String phone,
-        String addressLine1,
-        String addressLine2,
-        String city,
-        String state,
-        String country,
-        String postalCode,
-        boolean active,
-        OffsetDateTime createdAt,
-        OffsetDateTime updatedAt
-) {
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class WarehouseDto {
+
+    private Long id;
+    private Long branchId;
+    private String name;
+    private WarehouseType type;
+    private String phone;
+    private boolean active;
+    private OffsetDateTime createdAt;
+    private OffsetDateTime updatedAt;
 }

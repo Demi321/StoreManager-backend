@@ -4,23 +4,33 @@ import com.sm.storagemanager.shared.enums.SaleStatus;
 import com.sm.storagemanager.shared.enums.SaleType;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-public record SaleDto(
-        Long id,
-        Long entityId,
-        Long warehouseId,
-        Long userId,
-        Long customerId,
-        String saleFolio,
-        OffsetDateTime saleDate,
-        BigDecimal subtotal,
-        BigDecimal discountTotal,
-        BigDecimal taxTotal,
-        BigDecimal total,
-        SaleStatus status,
-        SaleType saleType,
-        String notes,
-        OffsetDateTime createdAt,
-        OffsetDateTime updatedAt
-) {
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class SaleDto {
+
+    private Long id;
+    private Long branchId;
+    private Long warehouseId;
+    private Long userId;
+    private Long customerId;
+    private String saleFolio;
+    private OffsetDateTime saleDate;
+    private BigDecimal subtotal;
+    private BigDecimal discountTotal;
+    private BigDecimal taxTotal;
+    private BigDecimal total;
+    private SaleStatus status;
+    private SaleType saleType;
+    private String notes;
+    private OffsetDateTime createdAt;
+    private OffsetDateTime updatedAt;
 }

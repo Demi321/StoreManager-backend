@@ -2,23 +2,33 @@ package com.sm.storagemanager.customer.dto;
 
 import com.sm.storagemanager.shared.enums.CustomerType;
 import java.time.OffsetDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-public record CustomerDto(
-        Long id,
-        Long entityId,
-        String name,
-        CustomerType customerType,
-        String taxId,
-        String phone,
-        String email,
-        String addressLine1,
-        String addressLine2,
-        String city,
-        String state,
-        String country,
-        String postalCode,
-        boolean active,
-        OffsetDateTime createdAt,
-        OffsetDateTime updatedAt
-) {
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class CustomerDto {
+
+    private Long id;
+    private Long branchId;
+    private String name;
+    private CustomerType customerType;
+    private String taxId;
+    private String phone;
+    private String email;
+    private String addressLine1;
+    private String addressLine2;
+    private String city;
+    private String state;
+    private String country;
+    private String postalCode;
+    private boolean active;
+    private OffsetDateTime createdAt;
+    private OffsetDateTime updatedAt;
 }

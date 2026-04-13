@@ -1,6 +1,6 @@
 package com.sm.storagemanager.productcategory.service.impl;
 
-import com.sm.storagemanager.businessentity.entity.BusinessEntity;
+import com.sm.storagemanager.branch.entity.Branch;
 import com.sm.storagemanager.productcategory.dto.ProductCategoryDto;
 import com.sm.storagemanager.productcategory.entity.ProductCategory;
 import com.sm.storagemanager.productcategory.repository.ProductCategoryRepository;
@@ -22,7 +22,7 @@ public class ProductCategoryServiceImpl
     protected ProductCategoryDto toDto(ProductCategory entity) {
         return new ProductCategoryDto(
                 entity.getId(),
-                entity.getEntity().getId(),
+                entity.getBranch().getId(),
                 entity.getName(),
                 entity.getDescription(),
                 entity.getStatus(),
@@ -40,11 +40,12 @@ public class ProductCategoryServiceImpl
 
     @Override
     protected void updateEntity(ProductCategory entity, ProductCategoryDto dto) {
-        entity.setEntity(getReference(BusinessEntity.class, dto.entityId()));
-        entity.setName(dto.name());
-        entity.setDescription(dto.description());
-        entity.setStatus(dto.status());
-        entity.setCreatedAt(dto.createdAt());
-        entity.setUpdatedAt(dto.updatedAt());
+        entity.setBranch(getReference(Branch.class, dto.getBranchId()));
+        entity.setName(dto.getName());
+        entity.setDescription(dto.getDescription());
+        entity.setStatus(dto.getStatus());
+        entity.setCreatedAt(dto.getCreatedAt());
+        entity.setUpdatedAt(dto.getUpdatedAt());
     }
 }
+

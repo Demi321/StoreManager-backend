@@ -38,10 +38,11 @@ public class PaymentMethodServiceImpl
 
     @Override
     protected void updateEntity(PaymentMethod entity, PaymentMethodDto dto) {
-        entity.setCode(dto.code());
-        entity.setName(dto.name());
-        entity.setDescription(dto.description());
-        entity.setStatus(dto.status());
-        entity.setCreatedAt(dto.createdAt());
+        entity.setCode(dto.getCode());
+        entity.setName(dto.getName());
+        entity.setDescription(dto.getDescription());
+        entity.setStatus(dto.getStatus());
+        entity.setCreatedAt(dto.getCreatedAt());
     }
 }
+

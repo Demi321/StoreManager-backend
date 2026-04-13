@@ -1,7 +1,7 @@
 package com.sm.storagemanager.purchase.entity;
 
 import com.sm.storagemanager.appuser.entity.AppUser;
-import com.sm.storagemanager.businessentity.entity.BusinessEntity;
+import com.sm.storagemanager.branch.entity.Branch;
 import com.sm.storagemanager.shared.enums.PurchaseStatus;
 import com.sm.storagemanager.supplier.entity.Supplier;
 import com.sm.storagemanager.warehouse.entity.Warehouse;
@@ -40,8 +40,8 @@ public class Purchase {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "entity_id", nullable = false)
-    private BusinessEntity entity;
+    @JoinColumn(name = "branch_id", nullable = false)
+    private Branch branch;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "supplier_id", nullable = false)

@@ -40,6 +40,18 @@ public abstract class AbstractCrudService<E, D, ID> implements CrudService<D, ID
 
     @Override
     @Transactional
+    public List<D> createAll(List<D> dtos) {
+        List<E> entities = dtos.stream()
+                .map(this::toNewEntity)
+                .toList();
+
+        return repository.saveAll(entities).stream()
+                .map(this::toDto)
+                .toList();
+    }
+
+    @Override
+    @Transactional
     public D update(ID id, D dto) {
         E entity = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Entity not found with id: " + id));

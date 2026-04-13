@@ -1,13 +1,12 @@
 package com.sm.storagemanager.security.service.impl;
 
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.stereotype.Service;
-import org.springframework.security.core.Authentication;
-
 import com.sm.storagemanager.security.dto.LoginRequest;
 import com.sm.storagemanager.security.dto.LoginResponse;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.stereotype.Service;
 
 @Service
 public class AuthService {
@@ -21,7 +20,7 @@ public class AuthService {
     public LoginResponse login(LoginRequest request) {
         Authentication authenticationRequest =
                 new UsernamePasswordAuthenticationToken(
-                        request.getUsername(),
+                        request.getBranchId() + "|" + request.getUsername(),
                         request.getPassword()
                 );
 
@@ -35,7 +34,8 @@ public class AuthService {
                 .orElse("SIN_ROL");
 
         return new LoginResponse(
-                "Autenticación correcta",
+                "Autenticacion correcta",
+                request.getBranchId(),
                 authenticationResult.getName(),
                 role
         );

@@ -41,6 +41,11 @@ public class AppRoleController {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.create(dto));
     }
 
+    @PostMapping("/bulk")
+    public ResponseEntity<List<AppRoleDto>> createAll(@RequestBody List<AppRoleDto> dtos) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.createAll(dtos));
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<AppRoleDto> update(@PathVariable Long id, @RequestBody AppRoleDto dto) {
         return ResponseEntity.ok(service.update(id, dto));

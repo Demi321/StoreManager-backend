@@ -5,6 +5,7 @@ import com.sm.storagemanager.businessentity.entity.BusinessEntity;
 import com.sm.storagemanager.businessentity.exception.BusinessEntityAlreadyExistsException;
 import com.sm.storagemanager.businessentity.repository.BusinessEntityRepository;
 import com.sm.storagemanager.businessentity.service.BusinessEntityService;
+import com.sm.storagemanager.sector.entity.Sector;
 import com.sm.storagemanager.shared.crud.service.impl.AbstractCrudService;
 import jakarta.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +33,7 @@ public class BusinessEntityServiceImpl extends AbstractCrudService<BusinessEntit
 
         try {
             
-            String entityName = dto.name();
+            String entityName = dto.getName();
 
             if (entityName != null && repository.existsByName(entityName)) {
                 throw new BusinessEntityAlreadyExistsException(entityName);
@@ -46,8 +47,8 @@ public class BusinessEntityServiceImpl extends AbstractCrudService<BusinessEntit
             String rootCauseMessage = NestedExceptionUtils.getMostSpecificCause(ex).getMessage();
             log.warn(
                     "Data integrity violation while creating business entity. name={}, taxId={}, cause={}",
-                    dto.name(),
-                    dto.taxId(),
+                    dto.getName(),
+                    dto.getTaxId(),
                     rootCauseMessage);
 
             throw ex;
@@ -58,17 +59,12 @@ public class BusinessEntityServiceImpl extends AbstractCrudService<BusinessEntit
     protected BusinessEntityDto toDto(BusinessEntity entity) {
         return new BusinessEntityDto(
                 entity.getId(),
+                entity.getSector().getId(),
                 entity.getName(),
                 entity.getLegalName(),
                 entity.getTaxId(),
                 entity.getPhone(),
                 entity.getEmail(),
-                entity.getAddressLine1(),
-                entity.getAddressLine2(),
-                entity.getCity(),
-                entity.getState(),
-                entity.getCountry(),
-                entity.getPostalCode(),
                 entity.getStatus(),
                 entity.getCreatedAt(),
                 entity.getUpdatedAt());
@@ -83,20 +79,26 @@ public class BusinessEntityServiceImpl extends AbstractCrudService<BusinessEntit
 
     @Override
     protected void updateEntity(BusinessEntity entity, BusinessEntityDto dto) {
-        entity.setName(dto.name());
-        entity.setLegalName(dto.legalName());
-        entity.setTaxId(dto.taxId());
-        entity.setPhone(dto.phone());
-        entity.setEmail(dto.email());
-        entity.setAddressLine1(dto.addressLine1());
-        entity.setAddressLine2(dto.addressLine2());
-        entity.setCity(dto.city());
-        entity.setState(dto.state());
-        entity.setCountry(dto.country());
-        entity.setPostalCode(dto.postalCode());
-        entity.setStatus(dto.status());
-        entity.setCreatedAt(dto.createdAt());
-        entity.setUpdatedAt(dto.updatedAt());
+        entity.setSector(getReference(Sector.class, dto.getSectorId()));
+        entity.setName(dto.getName());
+        entity.setLegalName(dto.getLegalName());
+        entity.setTaxId(dto.getTaxId());
+        entity.setPhone(dto.getPhone());
+        entity.setEmail(dto.getEmail());
+        entity.setStatus(dto.getStatus());
+        entity.setCreatedAt(dto.getCreatedAt());
+        entity.setUpdatedAt(dto.getUpdatedAt());
+    }
+
+    @Override
+    public boolean existsByName(String name) {
+        return repository.existsByName(name);
+    }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return repository.existsByEmail(email);
     }
 
 }
+

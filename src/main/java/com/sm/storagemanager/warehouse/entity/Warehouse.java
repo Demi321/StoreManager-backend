@@ -1,6 +1,6 @@
 package com.sm.storagemanager.warehouse.entity;
 
-import com.sm.storagemanager.businessentity.entity.BusinessEntity;
+import com.sm.storagemanager.branch.entity.Branch;
 import com.sm.storagemanager.shared.enums.WarehouseType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,8 +36,8 @@ public class Warehouse {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "entity_id", nullable = false)
-    private BusinessEntity entity;
+    @JoinColumn(name = "branch_id", nullable = false)
+    private Branch branch;
 
     @Column(nullable = false, length = 120)
     private String name;
@@ -49,24 +49,6 @@ public class Warehouse {
 
     @Column(length = 30)
     private String phone;
-
-    @Column(name = "address_line_1", length = 200)
-    private String addressLine1;
-
-    @Column(name = "address_line_2", length = 200)
-    private String addressLine2;
-
-    @Column(length = 100)
-    private String city;
-
-    @Column(length = 100)
-    private String state;
-
-    @Column(length = 100)
-    private String country;
-
-    @Column(name = "postal_code", length = 20)
-    private String postalCode;
 
     @Column(name = "is_active", nullable = false)
     private boolean active;

@@ -1,6 +1,6 @@
 package com.sm.storagemanager.inventory.service.impl;
 
-import com.sm.storagemanager.businessentity.entity.BusinessEntity;
+import com.sm.storagemanager.branch.entity.Branch;
 import com.sm.storagemanager.inventory.dto.InventoryDto;
 import com.sm.storagemanager.inventory.entity.Inventory;
 import com.sm.storagemanager.inventory.repository.InventoryRepository;
@@ -23,7 +23,7 @@ public class InventoryServiceImpl extends AbstractCrudService<Inventory, Invento
     protected InventoryDto toDto(Inventory entity) {
         return new InventoryDto(
                 entity.getId(),
-                entity.getEntity().getId(),
+                entity.getBranch().getId(),
                 entity.getWarehouse().getId(),
                 entity.getProduct().getId(),
                 entity.getStockOnHand(),
@@ -43,12 +43,13 @@ public class InventoryServiceImpl extends AbstractCrudService<Inventory, Invento
 
     @Override
     protected void updateEntity(Inventory entity, InventoryDto dto) {
-        entity.setEntity(getReference(BusinessEntity.class, dto.entityId()));
-        entity.setWarehouse(getReference(Warehouse.class, dto.warehouseId()));
-        entity.setProduct(getReference(Product.class, dto.productId()));
-        entity.setStockOnHand(dto.stockOnHand());
-        entity.setStockReserved(dto.stockReserved());
-        entity.setAverageCost(dto.averageCost());
-        entity.setUpdatedAt(dto.updatedAt());
+        entity.setBranch(getReference(Branch.class, dto.getBranchId()));
+        entity.setWarehouse(getReference(Warehouse.class, dto.getWarehouseId()));
+        entity.setProduct(getReference(Product.class, dto.getProductId()));
+        entity.setStockOnHand(dto.getStockOnHand());
+        entity.setStockReserved(dto.getStockReserved());
+        entity.setAverageCost(dto.getAverageCost());
+        entity.setUpdatedAt(dto.getUpdatedAt());
     }
 }
+

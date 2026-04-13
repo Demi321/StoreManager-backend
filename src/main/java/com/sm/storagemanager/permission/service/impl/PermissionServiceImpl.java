@@ -38,11 +38,12 @@ public class PermissionServiceImpl extends AbstractCrudService<Permission, Permi
 
     @Override
     protected void updateEntity(Permission entity, PermissionDto dto) {
-        entity.setCode(dto.code());
-        entity.setName(dto.name());
-        entity.setDescription(dto.description());
-        entity.setModule(dto.module());
-        entity.setStatus(dto.status());
-        entity.setCreatedAt(dto.createdAt());
+        entity.setCode(dto.getCode());
+        entity.setName(dto.getName());
+        entity.setDescription(dto.getDescription());
+        entity.setModule(dto.getModule());
+        entity.setStatus(dto.getStatus());
+        entity.setCreatedAt(dto.getCreatedAt());
     }
 }
+

@@ -11,6 +11,8 @@ public interface CrudService<D, ID> {
 
     D create(D dto);
 
+    List<D> createAll(List<D> dtos);
+
     D update(ID id, D dto);
 
     void deleteById(ID id);

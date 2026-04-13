@@ -41,11 +41,12 @@ public class PurchaseItemServiceImpl
 
     @Override
     protected void updateEntity(PurchaseItem entity, PurchaseItemDto dto) {
-        entity.setPurchase(getReference(Purchase.class, dto.purchaseId()));
-        entity.setProduct(getReference(Product.class, dto.productId()));
-        entity.setQuantity(dto.quantity());
-        entity.setUnitCost(dto.unitCost());
-        entity.setLineSubtotal(dto.lineSubtotal());
-        entity.setLineTotal(dto.lineTotal());
+        entity.setPurchase(getReference(Purchase.class, dto.getPurchaseId()));
+        entity.setProduct(getReference(Product.class, dto.getProductId()));
+        entity.setQuantity(dto.getQuantity());
+        entity.setUnitCost(dto.getUnitCost());
+        entity.setLineSubtotal(dto.getLineSubtotal());
+        entity.setLineTotal(dto.getLineTotal());
     }
 }
+
