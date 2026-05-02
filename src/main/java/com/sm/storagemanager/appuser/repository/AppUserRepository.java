@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AppUserRepository extends JpaRepository<AppUser, Long> {
 
-    Optional<AppUser> findByBranch_IdAndUsernameIgnoreCase(Long branchId, String username);
+    Optional<AppUser> findByUsernameOrEmail(String username,String email);
 
     boolean existsByUsernameIgnoreCase(String username);
 }

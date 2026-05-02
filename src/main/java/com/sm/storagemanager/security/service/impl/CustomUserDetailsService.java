@@ -20,23 +20,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        String[] credentials = username.split("\\|", 2);
-        if (credentials.length != 2) {
-            throw new UsernameNotFoundException(AuthMessage.USER_NOT_FOUND.getMessage().concat(username));
-        }
-
-        Long branchId;
-        try {
-            branchId = Long.valueOf(credentials[0]);
-        } catch (NumberFormatException ex) {
-            throw new UsernameNotFoundException(AuthMessage.USER_NOT_FOUND.getMessage().concat(username), ex);
-        }
-
-        String rawUsername = credentials[1];
-
-        AppUser appUser = appUserRepository.findByBranch_IdAndUsernameIgnoreCase(branchId, rawUsername)
-                .orElseThrow(() -> new UsernameNotFoundException(
-                        AuthMessage.USER_NOT_FOUND.getMessage().concat(rawUsername)));
+      
+        AppUser appUser = appUserRepository.findByUsernameOrEmail(username,username)
+                                            .orElseThrow(() -> new UsernameNotFoundException(
+                                            AuthMessage.USER_NOT_FOUND.getMessage().concat(username)));
 
         return User.builder()
                 .username(appUser.getUsername())

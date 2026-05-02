@@ -20,7 +20,7 @@ public class AuthService {
     public LoginResponse login(LoginRequest request) {
         Authentication authenticationRequest =
                 new UsernamePasswordAuthenticationToken(
-                        request.getBranchId() + "|" + request.getUsername(),
+                        request.getUsername(),
                         request.getPassword()
                 );
 
